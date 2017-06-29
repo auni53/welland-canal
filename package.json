@@ -1,0 +1,42 @@
+{
+  "name": "ask-transit",
+  "version": "1.0.0",
+  "description": "Alexa skill for transit times.",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "alexa-sdk": "^1.0.9",
+    "bluebird": "^3.5.0",
+    "fuse.js": "^3.0.4",
+    "isomorphic-fetch": "^2.2.1",
+    "pg": "^6.1.5",
+    "sequelize": "^3.30.4",
+    "xmldom": "^0.1.22",
+    "xpath": "0.0.23"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "chai-things": "^0.2.0",
+    "eslint": "^2.11.1",
+    "eslint-plugin-import": "^1.8.1",
+    "mocha": "^2.5.3",
+    "sequelize-cli": "^2.7.0"
+  },
+  "scripts": {
+    "dev": "webpack -d --watch",
+    "build": "webpack && (cd dist && zip -r index.js.zip index.js)",
+    "predeploy": "(cd src && zip -qr ../dist/bundle.zip *) && (zip -qr dist/bundle.zip node_modules)",
+    "deploy": "aws lambda update-function-code --zip-file fileb://dist/bundle.zip --function-name ask-welland-canal --output json",
+    "test": "mocha --recursive --no-timeouts -r tests/index.js tests --es_staging"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auni53/ask-transit.git"
+  },
+  "author": "Auni Ahsan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/auni53/ask-transit/issues"
+  },
+  "homepage": "https://github.com/auni53/ask-transit#readme"
+}
